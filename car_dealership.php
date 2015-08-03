@@ -77,12 +77,10 @@
       foreach ($cars as $car) {
         if($car->getPrice() < $_GET["price"] && $car->getMiles() <= $_GET["miles"]) {
             array_push($car_search, $car);
-
         }
       }
       return $car_search;
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -95,23 +93,33 @@
     <div class="container">
       <h1>Find a Car</h1>
         <?php
-          foreach (carSearch($cars) as $car) {
-            $car_model = $car->getMake();
-            $car_price = $car->getPrice();
-            $car_miles = $car->getMiles();
-            $car_photo = $car->getPhoto();
-            echo "<div class='row'>
-                <div class='col-md-6'>
-                    <img src='$car_photo'>
-                    </div>
+
+        if (empty(carSearch($cars))) {
+          echo "No cars match your search";
+        } else {
+
+              foreach (carSearch($cars) as $car) {
+
+                $car_model = $car->getMake();
+                $car_price = $car->getPrice();
+                $car_miles = $car->getMiles();
+                $car_photo = $car->getPhoto();
+
+
+                  echo "<div class='row'>
                     <div class='col-md-6'>
-                        <p>$car_model</p>
-                        <p>$$car_price</p>
-                        <p>$car_miles miles</p>
-                    </div>
-                  </div>
-                    ";
-          }
+                        <img src='$car_photo'>
+                        </div>
+                        <div class='col-md-6'>
+                            <p>$car_model</p>
+                            <p>$$car_price</p>
+                            <p>$car_miles miles</p>
+                        </div>
+                      </div>
+                        ";
+                    }
+              }
+
           ?>
       </div>
   </body>
