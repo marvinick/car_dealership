@@ -8,13 +8,15 @@
       private $photo;
 
 
-      function __construct($make_model, $price, $photo, $miles)
+      function __construct($make_model, $price = 100000, $photo, $miles)
       {
         $this->model = $make_model;
         $this->price = $price;
         $this->photo = $photo;
         $this->miles = $miles;
+
       }
+
 
       function setMake($new_make)
       {
@@ -61,13 +63,26 @@
       }
     }
 
-    $first_car = new Car ("Honda Accord", 5000 , "img/hondaaccord.jpeg", 200);
+    $first_car = new Car ("Honda Accord", 1000, "img/hondaaccord.jpeg", 200);
     $second_car = new Car ("Honda Element", 1000, "img/hondaelement.jpeg", 200);
     $third_car = new Car ("Ferrari LaFerrari", 50000, "img/ferrari.jpeg", 50);
     $fourth_car = new Car ("Tesla Model S", 3000, "img/tesla.jpg", 3000);
 
 
     $cars = array($first_car, $second_car, $third_car, $fourth_car);
+
+    function carSearch($cars)
+    {
+      $car_search = array();
+      foreach ($cars as $car) {
+        if($car->getPrice() < $_GET["price"] && $car->getMiles() <= $_GET["miles"]) {
+            array_push($car_search, $car);
+
+        }
+      }
+      return $car_search;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +95,7 @@
     <div class="container">
       <h1>Find a Car</h1>
         <?php
-          foreach ($cars as $car) {
+          foreach (carSearch($cars) as $car) {
             $car_model = $car->getMake();
             $car_price = $car->getPrice();
             $car_miles = $car->getMiles();
@@ -92,7 +107,7 @@
                     <div class='col-md-6'>
                         <p>$car_model</p>
                         <p>$$car_price</p>
-                        <p>$car_miles</p>
+                        <p>$car_miles miles</p>
                     </div>
                   </div>
                     ";
