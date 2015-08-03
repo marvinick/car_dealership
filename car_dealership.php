@@ -7,16 +7,13 @@
       private $miles;
       private $photo;
 
-
       function __construct($make_model, $price = 100000, $photo, $miles)
       {
         $this->model = $make_model;
         $this->price = $price;
         $this->photo = $photo;
         $this->miles = $miles;
-
       }
-
 
       function setMake($new_make)
       {
@@ -87,6 +84,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
   <title>Car Shop</title>
 </head>
   <body>
@@ -94,31 +92,30 @@
       <h1>Find a Car</h1>
         <?php
 
-        if (empty(carSearch($cars))) {
-          echo "No cars match your search";
-        } else {
+            if (empty(carSearch($cars))) {
+              echo "No cars match your search";
+            } else {
 
-              foreach (carSearch($cars) as $car) {
+                foreach (carSearch($cars) as $car) {
 
-                $car_model = $car->getMake();
-                $car_price = $car->getPrice();
-                $car_miles = $car->getMiles();
-                $car_photo = $car->getPhoto();
+                  $car_model = $car->getMake();
+                  $car_price = $car->getPrice();
+                  $car_miles = $car->getMiles();
+                  $car_photo = $car->getPhoto();
 
-
-                  echo "<div class='row'>
-                    <div class='col-md-6'>
-                        <img src='$car_photo'>
+                    echo "<div class='row'>
+                      <div class='col-md-6'>
+                          <img src='$car_photo'>
+                          </div>
+                          <div class='col-md-6'>
+                              <p>$car_model</p>
+                              <p>$$car_price</p>
+                              <p>$car_miles miles</p>
+                          </div>
                         </div>
-                        <div class='col-md-6'>
-                            <p>$car_model</p>
-                            <p>$$car_price</p>
-                            <p>$car_miles miles</p>
-                        </div>
-                      </div>
-                        ";
-                    }
-              }
+                          ";
+                      }
+            }
 
           ?>
       </div>
