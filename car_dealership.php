@@ -7,7 +7,7 @@
       public $miles;
 
 
-      function __construct($make_model, $price, $miles)
+      function __construct($make_model, $price, $photo, $miles)
       {
         $this->model = $make_model;
         $this->price = $price;
@@ -17,8 +17,8 @@
 
     }
 
-    $first_car = new Car ("Honda_Accord", 5000 , 200);
-    $second_car = new Car ("Honda_Element", 1000, 200);
+    $first_car = new Car ("Honda_Accord", 5000 , "img/hondaaccord.jpeg", 200);
+    $second_car = new Car ("Honda_Element", 1000, "img/hondaelement.jpeg", 200);
 
     $cars = array($first_car, $second_car);
 ?>
@@ -41,6 +41,7 @@
                     <div class='col-md-6'>
                         <p>$car->model</p>
                         <p>$$car->price</p>
+                        <p>$car->photo</p>
                         <p>$car->miles</p>
                     </div>
                   </div>
