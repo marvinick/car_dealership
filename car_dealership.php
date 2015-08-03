@@ -2,9 +2,10 @@
 
     class Car
     {
-      public $make_model;
-      public $price;
-      public $miles;
+      private $make_model;
+      private $price;
+      private $miles;
+      private $photo;
 
 
       function __construct($make_model, $price, $photo, $miles)
@@ -15,12 +16,58 @@
         $this->miles = $miles;
       }
 
+      function setMake($new_make)
+      {
+        $this->make_model = $new_make;
+      }
+
+      function getMake()
+      {
+        return $this->make_model;
+      }
+
+      function setPrice($new_price)
+      {
+        $float_price = (float) $new_price;
+        if ($float_price != 0) {
+          $formatted_price = number_format($float_price, 2);
+          $this->price = $formatted_price;
+        }
+      }
+
+      function getPrice()
+      {
+        return $this->price;
+      }
+
+      function setMiles($new_miles)
+      {
+        $this->miles = $new_miles;
+      }
+
+      function getMiles()
+      {
+        return $this->miles;
+      }
+
+      function setPhoto($new_photo)
+      {
+        $this->photo = $new_photo;
+      }
+
+      function getPhoto()
+      {
+        return $this->photo;
+      }
     }
 
-    $first_car = new Car ("Honda_Accord", 5000 , "img/hondaaccord.jpeg", 200);
-    $second_car = new Car ("Honda_Element", 1000, "img/hondaelement.jpeg", 200);
+    $first_car = new Car ("Honda Accord", 5000 , "img/hondaaccord.jpeg", 200);
+    $second_car = new Car ("Honda Element", 1000, "img/hondaelement.jpeg", 200);
+    $third_car = new Car ("Ferrari LaFerrari", 50000, "img/ferrari.jpeg", 50);
+    $fourth_car = new Car ("Tesla Model S", 3000, "img/tesla.jpg", 3000);
 
-    $cars = array($first_car, $second_car);
+
+    $cars = array($first_car, $second_car, $third_car, $fourth_car);
 ?>
 
 <!DOCTYPE html>
@@ -34,15 +81,18 @@
       <h1>Find a Car</h1>
         <?php
           foreach ($cars as $car) {
+            $car_model = $car->getMake();
+            $car_price = $car->getPrice();
+            $car_miles = $car->getMiles();
+            $car_photo = $car->getPhoto();
             echo "<div class='row'>
                 <div class='col-md-6'>
-                    <img src='$car->photo'>
+                    <img src='$car_photo'>
                     </div>
                     <div class='col-md-6'>
-                        <p>$car->model</p>
-                        <p>$$car->price</p>
-                        <p>$car->photo</p>
-                        <p>$car->miles</p>
+                        <p>$car_model</p>
+                        <p>$$car_price</p>
+                        <p>$car_miles</p>
                     </div>
                   </div>
                     ";
